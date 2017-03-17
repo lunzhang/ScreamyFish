@@ -7,17 +7,19 @@ export class App{
     this.audioCtx = new (AudioContext || webkitAudioContext)();
     this.analyser = this.audioCtx.createAnalyser();
     navigator.mediaDevices.getUserMedia({audio:true}).then((stream)=>{
-        let source = this.audioCtx.createMediaStreamSource(stream);
-        source.connect(this.analyser);
-        this.animate();
+      let source = this.audioCtx.createMediaStreamSource(stream);
+      source.connect(this.analyser);
+      this.animate();
     }).catch((err)=>{
-        //alert(err.name);
+      
     });
-    this.screamyFish = new ScreamyFish();
+
+    this.screamyFish = new ScreamyFish(600,400);
+
   }
 
   animate(){
-    requestAnimationFrame(this.animte);
+    requestAnimationFrame(this.animate);
   }
 
 }
