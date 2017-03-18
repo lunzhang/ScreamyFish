@@ -7,7 +7,7 @@ export default class MenuState extends Phaser.State{
   create(){
     //add detail
     let detail = this.game.add.text(this.game.world.centerX, 100,
-      "Control the fish with your voice.",{
+      "Make sound to move the fish",{
       fill:'#ffffff',
       align: "center"
     });
@@ -15,8 +15,8 @@ export default class MenuState extends Phaser.State{
 
     //add start
     let start = this.game.add.text(this.game.world.centerX, 150,
-      "Scream to Start",{
-      fill:'#ffffff',
+      "Start Game",{
+      fill:'#4CAF50',
       align: "center"
     });
     start.inputEnabled = true;
@@ -36,7 +36,7 @@ export default class MenuState extends Phaser.State{
 
     //start physics
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.game.physics.arcade.gravity.y = 500;
+    this.game.physics.arcade.gravity.y = 300;
 
     //create fish
     this.fish = new Fish(this.game,this.game.world.centerX,this.game.world.centerY);

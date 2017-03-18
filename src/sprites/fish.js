@@ -9,8 +9,7 @@ export default class Fish extends Phaser.Sprite{
   }
 
   scream(amount){
-    this.body.velocity.y = -amount || -300;
-    this.game.add.tween(this).to({ angle: 0 }, 100).start();
+    this.body.velocity.y = -amount || -200;
   }
 
 }

@@ -1,18 +1,108 @@
 webpackJsonp([0],[
 /* 0 */,
-/* 1 */,
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__states_boot_js__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__states_game_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_menu_js__ = __webpack_require__(19);
+
+
+
+
+
+class ScreamyFish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Game {
+
+  constructor(width,height){
+    super(width, height, __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.AUTO, 'world', null);
+
+    ScreamyFish.highScore = localStorage.sfHighScore !== undefined ? localStorage.sfHighScore : 0;
+    ScreamyFish.score = 0;
+
+    this.state.add('boot', __WEBPACK_IMPORTED_MODULE_1__states_boot_js__["a" /* default */], false);
+    this.state.add('game', __WEBPACK_IMPORTED_MODULE_2__states_game_js__["a" /* default */], false);
+    this.state.add('menu', __WEBPACK_IMPORTED_MODULE_3__states_menu_js__["a" /* default */], false);
+    this.state.start('boot');
+  }
+
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ScreamyFish;
+
+
+
+/***/ }),
 /* 2 */,
-/* 3 */,
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bubble_js__ = __webpack_require__(14);
+
+
+
+class BubbleGroup extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Group{
+
+    constructor(game){
+      super(game);
+      this.x = this.game.width;
+    }
+
+    generateBubbles(){
+        let height = this.game.rnd.integerInRange(0,this.game.height-50);
+        let bubble = new __WEBPACK_IMPORTED_MODULE_1__bubble_js__["a" /* default */](this.game,0,height);
+        this.add(bubble);
+    }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = BubbleGroup;
+
+
+
+/***/ }),
 /* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
+
+
+class Fish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
+
+  constructor(game,x,y,key,frame){
+    super(game,x,y,'fish',frame);
+    this.scale.setTo(0.3,0.3);
+    this.game.physics.arcade.enableBody(this);
+  }
+
+  scream(amount){
+    this.body.velocity.y = -amount || -200;
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Fish;
+
+
+
+/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(6);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(11)(content, {});
+var update = __webpack_require__(12)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29,52 +119,21 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__states_boot_js__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__states_game_js__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__states_menu_js__ = __webpack_require__(17);
-
-
-
-
-
-class ScreamyFish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Game {
-
-  constructor(){
-    super(800, 600, __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.AUTO, 'content', null);
-    this.state.add('boot', __WEBPACK_IMPORTED_MODULE_1__states_boot_js__["a" /* default */], false);
-    this.state.add('game', __WEBPACK_IMPORTED_MODULE_2__states_game_js__["a" /* default */], false);
-    this.state.add('menu', __WEBPACK_IMPORTED_MODULE_3__states_menu_js__["a" /* default */], false);
-    this.state.start('boot');
-  }
-
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = ScreamyFish;
-
-
-
-/***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)();
+exports = module.exports = __webpack_require__(9)();
 // imports
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "html, body {\n  height: 100%;\n  margin: 0; }\n\n#world {\n  display: inline-block;\n  position: relative;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports) {
 
 /*
@@ -130,10 +189,9 @@ module.exports = function() {
 
 
 /***/ }),
-/* 8 */,
-/* 9 */,
 /* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports) {
 
 /*
@@ -385,7 +443,8 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */,
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -393,49 +452,54 @@ function updateLink(linkElement, obj) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-class Fish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
+class Bubble extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
 
   constructor(game,x,y,key,frame){
-    super(game,x,y,'__missing',frame);
-    this.anchor.setTo(0.5, 0.5);
-    this.animations.add('scream', [0, 1, 2, 3, 4], 10, true);
-    this.game.physics.arcade.enableBody(this);
+    super(game,x,y,'bubble',frame);
+    this.width = 30;
+    this.height = 30;
+    this.game.physics.arcade.enable(this);
+    this.body.allowGravity = false;
+    let speed = this.game.rnd.integerInRange(50,150);
+    this.body.velocity.x = -speed;
+    this.checkWorldBounds = true;
+    this.events.onOutOfBounds.add(this.onOutOfBounds,this);
   }
 
-  update() {
-    if (this.angle < 90) {
-      this.angle += 2.5;
-    }
-  }
-
-  scream(){
-    this.body.velocity.y = -200;
-    this.game.add.tween(this).to({ angle: 0 }, 100).start();
+  onOutOfBounds(){
+    this.destroy();
   }
 
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = Fish;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Bubble;
 
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__main_js__ = __webpack_require__(1);
 
 
 class Pipe extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
 
   constructor(game,x,y,key,frame){
-      super(game,x,y,'__missing',frame);
+      super(game,x,y,'pipe',frame);
       this.game.physics.arcade.enable(this);
       this.body.allowGravity = false;
       this.checkWorldBounds = true;
       this.outOfBoundsKill = true;
       this.body.velocity.x = -200;
+      this.events.onOutOfBounds.add(this.onOutOfBounds,this);
+  }
+
+  onOutOfBounds(){
+      __WEBPACK_IMPORTED_MODULE_1__main_js__["a" /* default */].score += .5;
+      this.destroy();
   }
 
 }
@@ -444,13 +508,13 @@ class Pipe extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pipe_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pipe_js__ = __webpack_require__(15);
 
 
 
@@ -462,93 +526,22 @@ class PipeGroup extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Group{
     }
 
     generatePipes(){
-        let pipeH1 = this.game.rnd.integerInRange(0,this.game.height-100);
+        let pipeH1 = this.game.rnd.integerInRange(50,this.game.height-170);
         let topPipe = new __WEBPACK_IMPORTED_MODULE_1__pipe_js__["a" /* default */](this.game,0,0);
+        topPipe.width = 50;
         topPipe.height = pipeH1;
         this.game.add.existing(topPipe);
         this.add(topPipe);
 
-        let pipeH2 = this.game.height - pipeH1 - 100;
+        let pipeH2 = this.game.height - pipeH1 - 120;
         let bottomPipe = new __WEBPACK_IMPORTED_MODULE_1__pipe_js__["a" /* default */](this.game,0,this.game.height-pipeH2);
+        bottomPipe.width = 50;
         bottomPipe.height = pipeH2;
         this.game.add.existing(bottomPipe);
         this.add(bottomPipe);
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = PipeGroup;
-
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
-
-
-class BootState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
-
-  preload(){
-    this.game.state.start('menu', true, false);
-  }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = BootState;
-
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sprites_pipegroup_js__ = __webpack_require__(14);
-
-
-
-
-class GameState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
-
-  create(){
-    this.game.physics.startSystem(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Physics.ARCADE);
-    this.game.physics.arcade.gravity.y = 500;
-
-    //init sprites
-    this.fish = new __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__["a" /* default */](this.game,this.game.world.centerX,this.game.world.centerY);
-    this.game.add.existing(this.fish);
-    this.pipeGroup = new __WEBPACK_IMPORTED_MODULE_2__sprites_pipegroup_js__["a" /* default */](this.game);
-    this.pipeGenerator = this.game.time.events.loop(1500,this.generatePipe,this);
-    this.pipeGenerator.timer.start();
-
-    var w = this.input.keyboard.addKey(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Keyboard.W);
-    w.onDown.add(this.fish.scream, this.fish);
-  }
-
-  update() {
-      this.game.physics.arcade.collide(this.fish, this.pipeGroup, this.loss,null,this);
-      if(this.fish.y > this.game.height){
-        this.game.state.start('menu');
-      }else if(this.fish.y < 0){
-          this.fish.body.velocity.y = 200;
-      }
-  }
-
-  generatePipe(){
-      this.pipeGroup.generatePipes();
-  }
-
-  loss(){
-    this.game.state.start('menu');
-  }
-
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = GameState;
 
 
 
@@ -561,25 +554,36 @@ class GameState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 
 
-class MenuState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
+class BootState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
+
+  constructor(){
+    super();
+    this.ready = false;
+  }
+
+  preload(){
+    this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+    this.game.load.image('pipe','src/assets/pipe.png');
+    this.game.load.image('bubble','src/assets/bubble.png');
+    this.game.load.image('fish','src/assets/fish.png');
+  }
 
   create(){
-    let text = this.game.add.text(this.game.world.centerX, this.game.world.centerY,
-      "Start Game",{
-      fill:'#ffffff',
-      align: "center"
-    });
-    text.inputEnabled = true;
-    text.anchor.set(0.5);
+    this.game.stage.backgroundColor = '#71c5cf';
+  }
 
-    text.events.onInputDown.add((item)=>{
-        this.game.state.start('game');
-    });
+  onLoadComplete() {
+    this.ready = true;
+  }
 
+  update(){
+    if(this.ready){
+      this.game.state.start('menu', true, false);
+    }
   }
 
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = MenuState;
+/* harmony export (immutable) */ __webpack_exports__["a"] = BootState;
 
 
 
@@ -588,30 +592,197 @@ class MenuState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sprites_pipegroup_js__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__main_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sprites_bubblegroup_js__ = __webpack_require__(3);
+
+
+
+
+
+
+class GameState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
+
+  create(){
+
+    //fish
+    this.fish = new __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__["a" /* default */](this.game,this.game.world.centerX,this.game.world.centerY);
+    this.game.add.existing(this.fish);
+
+    //pipes
+    this.pipeGroup = new __WEBPACK_IMPORTED_MODULE_2__sprites_pipegroup_js__["a" /* default */](this.game);
+    this.pipeGenerator = this.game.time.events.loop(2000,this.generatePipe,this);
+    this.pipeGenerator.timer.start();
+    this.generatePipe();
+
+    //clouds
+    this.bubbleGroup = new __WEBPACK_IMPORTED_MODULE_4__sprites_bubblegroup_js__["a" /* default */](this.game);
+    this.bubbleGenerator = this.time.events.loop(3000,this.generateBubble,this);
+    this.bubbleGenerator.timer.start();
+    this.generateBubble();
+
+    const w = this.input.keyboard.addKey(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Keyboard.W);
+    w.onDown.add(this.fish.scream, this.fish);
+  }
+
+  update() {
+    this.game.physics.arcade.collide(this.fish, this.pipeGroup, this.loss,null,this);
+    if(this.fish.y > this.game.height){
+      this.game.state.start('menu');
+    }else if(this.fish.y < 0){
+      this.fish.y = 0;
+    }
+  }
+
+  generatePipe(){
+    this.pipeGroup.generatePipes();
+  }
+
+  generateBubble(){
+      this.bubbleGroup.generateBubbles();
+  }
+
+  loss(){
+    if(__WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score > __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].highScore){
+      localStorage.sfHighScore = __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score;
+    }
+    __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score = 0;
+    this.game.state.start('menu');
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = GameState;
+
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sprites_bubblegroup_js__ = __webpack_require__(3);
+
+
+
+
+class MenuState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
+
+  create(){
+    //add detail
+    let detail = this.game.add.text(this.game.world.centerX, 100,
+      "Make sound to move the fish",{
+      fill:'#ffffff',
+      align: "center"
+    });
+    detail.anchor.set(0.5);
+
+    //add start
+    let start = this.game.add.text(this.game.world.centerX, 150,
+      "Start Game",{
+      fill:'#4CAF50',
+      align: "center"
+    });
+    start.inputEnabled = true;
+    start.anchor.set(0.5);
+    start.events.onInputDown.add((item)=>{
+        this.game.state.start('game');
+    });
+
+    //add warning
+    let warning = this.game.add.text(this.game.world.centerX, this.game.world.centerY+150,
+      "Please enable microphone to play the game",{
+      fontSize:'16px',
+      fill:'#ffffff',
+      align: "center"
+    });
+    warning.anchor.set(0.5);
+
+    //start physics
+    this.game.physics.startSystem(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Physics.ARCADE);
+    this.game.physics.arcade.gravity.y = 300;
+
+    //create fish
+    this.fish = new __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__["a" /* default */](this.game,this.game.world.centerX,this.game.world.centerY);
+    this.game.add.existing(this.fish);
+
+    this.bubbleGroup = new __WEBPACK_IMPORTED_MODULE_2__sprites_bubblegroup_js__["a" /* default */](this.game);
+    this.bubbleGenerator = this.time.events.loop(2000,this.generateBubble,this);
+    this.bubbleGenerator.timer.start();
+    this.generateBubble();
+
+  }
+
+  generateBubble(){
+      this.bubbleGroup.generateBubbles();
+  }
+
+  update(){
+      if(this.fish.y > this.game.world.centerY){
+        this.fish.scream(150);
+      }
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = MenuState;
+
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_main_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_main_js__ = __webpack_require__(1);
 
 
 
 class App{
 
   constructor(){
-    this.audioCtx = new (AudioContext || webkitAudioContext)();
-    this.analyser = this.audioCtx.createAnalyser();
     navigator.mediaDevices.getUserMedia({audio:true}).then((stream)=>{
-        let source = this.audioCtx.createMediaStreamSource(stream);
-        source.connect(this.analyser);
-        this.animate();
+      this.audioCtx = new (AudioContext || webkitAudioContext)();
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.fftSize = 32;
+      let source = this.audioCtx.createMediaStreamSource(stream);
+      source.connect(this.analyser);
+      this.frequencyData = new Uint8Array(this.analyser.frequencyBinCount);
+      this.analyser.getByteTimeDomainData(this.frequencyData);
+      this.animate();
     }).catch((err)=>{
-        //alert(err.name);
+      console.log(err);
     });
-    this.screamFish = new __WEBPACK_IMPORTED_MODULE_1__src_main_js__["a" /* default */]();
+
+    this.screamyFish = new __WEBPACK_IMPORTED_MODULE_1__src_main_js__["a" /* default */](600,400);
+
   }
 
   animate(){
-    requestAnimationFrame(this.animte);
+
+    requestAnimationFrame(()=>{
+      this.animate();
+    });
+
+    this.analyser.getByteFrequencyData(this.frequencyData);
+    let state = this.screamyFish.state.getCurrentState();
+    if(state.key === 'game'){
+        let sound = 0;
+        for(let i = 0;i<this.frequencyData.length;i++){
+          sound+=this.frequencyData[i];
+        }
+        sound = sound / this.frequencyData.length;
+        if(sound > 100){
+          state.fish.scream(sound);
+        }
+      }
   }
 
 }
@@ -623,4 +794,4 @@ const app = new App();
 
 
 /***/ })
-],[18]);
+],[20]);

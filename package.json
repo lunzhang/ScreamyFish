@@ -4,6 +4,7 @@
   "description": "screaming fish game",
   "main": "index.js",
   "scripts": {
+    "build":"webpack",
     "start": "webpack-dev-server --inline --progress --port 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

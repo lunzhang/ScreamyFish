@@ -9,7 +9,7 @@ export default class PipeGroup extends Phaser.Group{
     }
 
     generatePipes(){
-        let pipeH1 = this.game.rnd.integerInRange(0,this.game.height-120);
+        let pipeH1 = this.game.rnd.integerInRange(50,this.game.height-170);
         let topPipe = new Pipe(this.game,0,0);
         topPipe.width = 50;
         topPipe.height = pipeH1;
