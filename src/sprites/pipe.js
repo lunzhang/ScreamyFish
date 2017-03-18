@@ -4,7 +4,7 @@ export default class Pipe extends Phaser.Sprite{
 
   constructor(game,x,y,key,frame){
       super(game,x,y,'pipe',frame);
-      this.game.physics.arcade.enable(this);
+      this.game.physics.arcade.enableBody(this);
       this.body.allowGravity = false;
       this.checkWorldBounds = true;
       this.outOfBoundsKill = true;

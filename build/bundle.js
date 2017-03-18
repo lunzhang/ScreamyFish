@@ -489,7 +489,7 @@ class Pipe extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
 
   constructor(game,x,y,key,frame){
       super(game,x,y,'pipe',frame);
-      this.game.physics.arcade.enable(this);
+      this.game.physics.arcade.enableBody(this);
       this.body.allowGravity = false;
       this.checkWorldBounds = true;
       this.outOfBoundsKill = true;
@@ -624,17 +624,24 @@ class GameState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
     this.bubbleGenerator.timer.start();
     this.generateBubble();
 
-    const w = this.input.keyboard.addKey(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Keyboard.W);
+    //score//high score
+    this.score = this.game.add.text(20,20,'Score: '+__WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].Score,{
+      fontSize:'16px',
+      fill:'white'
+    });
+
+    let w = this.input.keyboard.addKey(__WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Keyboard.W);
     w.onDown.add(this.fish.scream, this.fish);
   }
 
   update() {
     this.game.physics.arcade.collide(this.fish, this.pipeGroup, this.loss,null,this);
     if(this.fish.y > this.game.height){
-      this.game.state.start('menu');
+      this.loss();
     }else if(this.fish.y < 0){
       this.fish.y = 0;
     }
+    this.score.text = 'Score: '+parseInt(__WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score);
   }
 
   generatePipe(){
@@ -647,6 +654,7 @@ class GameState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
 
   loss(){
     if(__WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score > __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].highScore){
+      __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].highScore = __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score;
       localStorage.sfHighScore = __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score;
     }
     __WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].score = 0;
@@ -667,6 +675,8 @@ class GameState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_phaser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_phaser__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sprites_bubblegroup_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__main_js__ = __webpack_require__(1);
+
 
 
 
@@ -711,10 +721,17 @@ class MenuState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
     this.fish = new __WEBPACK_IMPORTED_MODULE_1__sprites_fish_js__["a" /* default */](this.game,this.game.world.centerX,this.game.world.centerY);
     this.game.add.existing(this.fish);
 
+    //create bubble
     this.bubbleGroup = new __WEBPACK_IMPORTED_MODULE_2__sprites_bubblegroup_js__["a" /* default */](this.game);
     this.bubbleGenerator = this.time.events.loop(2000,this.generateBubble,this);
     this.bubbleGenerator.timer.start();
     this.generateBubble();
+
+    //high score
+    let highScore = this.game.add.text(20,20,'High Score : '+__WEBPACK_IMPORTED_MODULE_3__main_js__["a" /* default */].highScore,{
+      fontSize:'16px',
+      fill:'white'
+    });
 
   }
 

@@ -24,17 +24,24 @@ export default class GameState extends Phaser.State{
     this.bubbleGenerator.timer.start();
     this.generateBubble();
 
-    const w = this.input.keyboard.addKey(Phaser.Keyboard.W);
+    //score//high score
+    this.score = this.game.add.text(20,20,'Score: '+ScreamyFish.Score,{
+      fontSize:'16px',
+      fill:'white'
+    });
+
+    let w = this.input.keyboard.addKey(Phaser.Keyboard.W);
     w.onDown.add(this.fish.scream, this.fish);
   }
 
   update() {
     this.game.physics.arcade.collide(this.fish, this.pipeGroup, this.loss,null,this);
     if(this.fish.y > this.game.height){
-      this.game.state.start('menu');
+      this.loss();
     }else if(this.fish.y < 0){
       this.fish.y = 0;
     }
+    this.score.text = 'Score: '+parseInt(ScreamyFish.score);
   }
 
   generatePipe(){
@@ -47,6 +54,7 @@ export default class GameState extends Phaser.State{
 
   loss(){
     if(ScreamyFish.score > ScreamyFish.highScore){
+      ScreamyFish.highScore = ScreamyFish.score;
       localStorage.sfHighScore = ScreamyFish.score;
     }
     ScreamyFish.score = 0;

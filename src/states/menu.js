@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Fish from '../sprites/fish.js';
 import BubbleGroup from '../sprites/bubblegroup.js';
+import ScreamyFish from '../main.js';
 
 export default class MenuState extends Phaser.State{
 
@@ -42,10 +43,17 @@ export default class MenuState extends Phaser.State{
     this.fish = new Fish(this.game,this.game.world.centerX,this.game.world.centerY);
     this.game.add.existing(this.fish);
 
+    //create bubble
     this.bubbleGroup = new BubbleGroup(this.game);
     this.bubbleGenerator = this.time.events.loop(2000,this.generateBubble,this);
     this.bubbleGenerator.timer.start();
     this.generateBubble();
+
+    //high score
+    let highScore = this.game.add.text(20,20,'High Score : '+ScreamyFish.highScore,{
+      fontSize:'16px',
+      fill:'white'
+    });
 
   }
 
