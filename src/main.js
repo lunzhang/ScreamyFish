@@ -6,7 +6,7 @@ import MenuState from './states/menu.js';
 export default class ScreamyFish extends Phaser.Game {
 
   constructor(width,height){
-    super(width, height, Phaser.AUTO, 'world', null);
+    super(width, height, Phaser.AUTO, 'world');
 
     ScreamyFish.highScore = localStorage.sfHighScore !== undefined ? localStorage.sfHighScore : 0;
     ScreamyFish.score = 0;

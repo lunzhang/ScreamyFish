@@ -17,7 +17,7 @@ webpackJsonp([0],[
 class ScreamyFish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Game {
 
   constructor(width,height){
-    super(width, height, __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.AUTO, 'world', null);
+    super(width, height, __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.AUTO, 'world');
 
     ScreamyFish.highScore = localStorage.sfHighScore !== undefined ? localStorage.sfHighScore : 0;
     ScreamyFish.score = 0;
@@ -778,8 +778,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 class App{
 
   constructor(){
+    navigator.getUserMedia = (navigator.getUserMedia ||
+      navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia);
+
     navigator.mediaDevices.getUserMedia({audio:true}).then((stream)=>{
-      this.audioCtx = new (AudioContext || webkitAudioContext)();
+      this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       this.analyser = this.audioCtx.createAnalyser();
       this.analyser.fftSize = 32;
       let source = this.audioCtx.createMediaStreamSource(stream);
@@ -803,14 +807,17 @@ class App{
 
     this.analyser.getByteFrequencyData(this.frequencyData);
     let state = this.screamyFish.state.getCurrentState();
+
     if(state.key === 'game'){
         let sound = 0;
         for(let i = 0;i<this.frequencyData.length;i++){
           sound+=this.frequencyData[i];
         }
         sound = sound / this.frequencyData.length;
-        if(sound > 100){
+        if(this.screamyFish.device.desktop && sound > 100){
           state.fish.scream(sound);
+        }else if(sound > 50){
+          state.fish.scream(sound*2);
         }
       }
   }
