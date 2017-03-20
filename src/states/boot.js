@@ -16,6 +16,18 @@ export default class BootState extends Phaser.State{
 
   create(){
     this.game.stage.backgroundColor = '#71c5cf';
+    this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.parentIsWindow  = true;
+
+    if(this.game.device.desktop){
+        this.game.scale.maxWidth = 600;
+        this.game.scale.maxHeight = 400;
+        this.game.scale.minWidth = 600;
+        this.game.scale.minHeight = 400;
+    }
+
   }
 
   onLoadComplete() {

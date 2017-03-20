@@ -77,6 +77,7 @@ class Fish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
 
   constructor(game,x,y,key,frame){
     super(game,x,y,'fish',frame);
+    this.anchor.setTo(0.5);
     this.scale.setTo(0.3,0.3);
     this.game.physics.arcade.enableBody(this);
   }
@@ -102,7 +103,7 @@ class Fish extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.Sprite{
 var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(12)(content, {});
+var update = __webpack_require__(13)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -127,7 +128,7 @@ exports = module.exports = __webpack_require__(9)();
 
 
 // module
-exports.push([module.i, "html, body {\n  height: 100%;\n  margin: 0; }\n\n#world {\n  display: inline-block;\n  position: relative;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n", ""]);
+exports.push([module.i, "html, body {\n  height: 100%;\n  margin: 0; }\n\n#world {\n  display: inline-block;\n  position: relative; }\n", ""]);
 
 // exports
 
@@ -191,7 +192,8 @@ module.exports = function() {
 /***/ }),
 /* 10 */,
 /* 11 */,
-/* 12 */
+/* 12 */,
+/* 13 */
 /***/ (function(module, exports) {
 
 /*
@@ -443,7 +445,6 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 13 */,
 /* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -570,6 +571,18 @@ class BootState extends __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.State{
 
   create(){
     this.game.stage.backgroundColor = '#71c5cf';
+    this.game.scale.scaleMode = __WEBPACK_IMPORTED_MODULE_0_phaser___default.a.ScaleManager.EXACT_FIT;
+    this.game.scale.pageAlignHorizontally = true;
+    this.game.scale.pageAlignVertically = true;
+    this.game.scale.parentIsWindow  = true;
+
+    if(this.game.device.desktop){
+        this.game.scale.maxWidth = 600;
+        this.game.scale.maxHeight = 400;
+        this.game.scale.minWidth = 600;
+        this.game.scale.minHeight = 400;
+    }
+
   }
 
   onLoadComplete() {
